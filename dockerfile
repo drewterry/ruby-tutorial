@@ -1,6 +1,10 @@
-FROM ruby:2.5-slim
+FROM ruby:2.5-alpine
 
-RUN apt-get update && apt-get install -y build-essential libsqlite3-dev nodejs
+RUN apk add --update --no-cache \
+    build-base \
+    nodejs \
+    sqlite-dev \
+    tzdata
 
 RUN mkdir /blog
 WORKDIR /blog

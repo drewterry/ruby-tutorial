@@ -2,7 +2,7 @@ FROM ruby:2.5-alpine
 
 RUN apk add --update --no-cache \
     nodejs \
-    sqlite \
+    sqlite-dev \
     tzdata
 
 RUN mkdir /blog

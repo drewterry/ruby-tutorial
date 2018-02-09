@@ -3,6 +3,7 @@ FROM ruby:2.5-alpine
 RUN apk add --update --no-cache \
     nodejs \
     sqlite-dev \
+    sqlite-libs \
     tzdata
 
 RUN mkdir /blog

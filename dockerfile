@@ -1,9 +1,7 @@
 FROM ruby:2.5-alpine
 
 RUN apk add --update --no-cache \
-#   build-base \
     nodejs \
-#   sqlite-dev \
     tzdata
 
 RUN mkdir /blog
@@ -11,12 +9,11 @@ WORKDIR /blog
 
 COPY blog/Gemfile blog/Gemfile.lock ./
 
-RUN apk --update add --virtual build-dependencies build-base sqlite-dev && \
+RUN apk --update add --virtual build-dependencies sqlite-dev build-base && \
     gem install bundler && \
     bundle install --without development test && \
-    apk del build-dependencies
-
-# RUN gem install rails && bundle install
+    apk del build-dependencies && \
+    apk add --update sqlite-libs
 
 EXPOSE 3000
 

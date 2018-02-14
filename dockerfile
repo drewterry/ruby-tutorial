@@ -1,19 +1,13 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.5-slim
 
-RUN apk add --update --no-cache \
-    nodejs \
-    sqlite-libs \
-    tzdata
+RUN apt-get update && apt-get install -y build-essential libsqlite3-dev nodejs
 
 RUN mkdir /blog
 WORKDIR /blog
 
 COPY blog/Gemfile blog/Gemfile.lock ./
 
-RUN apk --update add --virtual build-dependencies sqlite-dev build-base && \
-    gem install bundler && \
-    bundle install --without test && \
-    apk del build-dependencies
+RUN gem install rails && bundle install
 
 EXPOSE 3000
 

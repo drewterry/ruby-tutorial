@@ -1,2 +1,9 @@
 AllCops:
   TargetRubyVersion: 2.5
+  
+Style/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'test/**/*.rb'
+    - 'app/api/**/*.rb'

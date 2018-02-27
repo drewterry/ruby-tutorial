@@ -1,4 +1,4 @@
-module API
+module Blog
   module V1
     ## Defines article API
     class Articles < Grape::API

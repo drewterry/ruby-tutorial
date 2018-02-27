@@ -1,10 +1,10 @@
-module API
+module Blog
   module V1
     ## Load the v1 API components
-    class Base < Grape::API
+    class API < Grape::API
       version ['v1'], using: :path
 
-      mount API::V1::Articles
+      mount Blog::V1::Articles
     end
   end
 end

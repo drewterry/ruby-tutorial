@@ -7,6 +7,5 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  mount API::Base, at: '/'
-
+  mount Blog::API, at: '/'
 end

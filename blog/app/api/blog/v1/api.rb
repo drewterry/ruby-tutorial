@@ -3,6 +3,7 @@ module Blog
     ## Load the v1 API components
     class API < Grape::API
       version ['v1'], using: :path
+      format :json
 
       mount Blog::V1::Articles
     end

@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   end
 
   mount Blog::API, at: '/'
+
+  mount GrapeSwaggerRails::Engine => '/swagger'
 end

@@ -27,6 +27,12 @@ gem 'devise'
 # Use grape to create an API
 gem 'grape'
 gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
+gem 'grape-swagger-rails'
+
+# Use rack-cors to enabe CORS
+# gem 'rack-cors'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

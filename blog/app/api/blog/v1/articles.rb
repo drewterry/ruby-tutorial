@@ -21,7 +21,6 @@ module Blog
         end
         post do
           declared_params = declared(params)
-          puts declared_params
           @article = Article.new(declared_params[:article_params])
 
           # Only save if test is false or missing
@@ -36,10 +35,10 @@ module Blog
         end
 
         # Methods requiring an article id
-        route_param :id do
+        route_param :article_id do
           desc 'Get specific article.'
           get do
-            present Article.find(params[:id]), with: Blog::Entities::Article
+            present Article.find(params[:article_id]), with: Blog::Entities::Article
           end
 
           desc 'Update article.'
@@ -53,7 +52,7 @@ module Blog
           end
           patch do
             declared_params = declared(params, include_missing: false)
-            @article = Article.find(params[:id])
+            @article = Article.find(params[:article_id])
 
             # Only save if test is false or missing
             unless declared_params[:test]
@@ -68,14 +67,48 @@ module Blog
 
           desc 'Destroy article.'
           delete do
-            present Article.find(params[:id]).destroy, with: Blog::Entities::Article
+            present Article.find(params[:article_id]).destroy, with: Blog::Entities::Article
           end
 
           resource :comments do
             desc 'Get all comments'
             get do
-              present Article.find(params[:id]).comments,
+              present Article.find(params[:article_id]).comments,
                       with: Blog::Entities::Comment
+            end
+
+            desc 'Create new comment.'
+            params do
+              requires :comment_params, type: Hash do
+                requires :commenter, type: String
+                requires :body, type: String
+              end
+              # Include a "don't save flag" for API testing
+              optional :test, type: Boolean
+            end
+            post do
+              declared_params = declared(params)
+              @article = Article.find(params[:article_id])
+              @comment = @article.comments.new(declared_params[:comment_params])
+
+              # Only save if test is false or missing
+              unless declared_params[:test]
+                unless @comment.save
+                  error! @comment.errors, 400
+                end
+              end
+
+              # Return the new article
+              present @comment, with: Blog::Entities::Comment
+            end
+
+            route_param :comment_id do
+              desc 'Destroy comment.'
+              delete do
+                @article = Article.find(params[:article_id])
+                @comment = @article.comments.find(params[:comment_id])
+                present @comment.destroy, with: Blog::Entities::Comment
+              end
             end
           end
         end

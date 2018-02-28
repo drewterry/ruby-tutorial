@@ -21,6 +21,7 @@ module Blog
         end
         post do
           declared_params = declared(params)
+          puts declared_params
           @article = Article.new(declared_params[:article_params])
 
           # Only save if test is false or missing
@@ -65,11 +66,10 @@ module Blog
             present @article, with: Blog::Entities::Article
           end
 
-=begin
-
           desc 'Destroy article.'
-
-=end
+          delete do
+            present Article.find(params[:id]).destroy, with: Blog::Entities::Article
+          end
 
           resource :comments do
             desc 'Get all comments'

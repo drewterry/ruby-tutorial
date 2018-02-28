@@ -12,15 +12,16 @@ module Blog
 
         desc 'Create new article.'
         params do
-          requires :title, type: String
-          requires :text, type: String
-          # Include a "don't save flag" for API testing?
+          requires :article_params, type: Hash do
+            requires :title, type: String
+            requires :text, type: String
+          end
+          # Include a "don't save flag" for API testing
           optional :test, type: Boolean
         end
         post do
           declared_params = declared(params)
-          @article = Article.new(title: declared_params[:title],
-                                 text: declared_params[:text])
+          @article = Article.new(declared_params[:article_params])
 
           # Only save if test is false or missing
           unless declared_params[:test]
@@ -39,23 +40,32 @@ module Blog
           get do
             present Article.find(params[:id]), with: Blog::Entities::Article
           end
-=begin
+
           desc 'Update article.'
           params do
-            requires :title, type: String
-            requires :text, type: String
-            # Include a "don't save flag" for API testing?
+            requires :article_params, type: Hash do
+              optional :title, type: String
+              optional :text, type: String
+            end
+            # Include a "don't save flag" for API testing
             optional :test, type: Boolean
           end
           patch do
+            declared_params = declared(params, include_missing: false)
             @article = Article.find(params[:id])
 
-            unless @article.update(article_params)
-
+            # Only save if test is false or missing
+            unless declared_params[:test]
+              unless @article.update(declared_params[:article_params])
+                error! @article.errors, 400
+              end
             end
 
+            # Return the updated article
             present @article, with: Blog::Entities::Article
           end
+
+=begin
 
           desc 'Destroy article.'
 

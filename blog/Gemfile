@@ -73,6 +73,8 @@ group :development do
   gem 'rails_layout' 
   # Improve error reporting
   gem 'better_errors'
+  # Use seed_dump to create seed file
+  gem 'seed_dump'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

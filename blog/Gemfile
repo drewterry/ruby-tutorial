@@ -71,6 +71,8 @@ group :development do
   gem 'grape_on_rails_routes'
   # Use rails_layout for front-end styling
   gem 'rails_layout' 
+  # Improve error reporting
+  gem 'better_errors'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

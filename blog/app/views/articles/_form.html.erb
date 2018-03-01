@@ -1,4 +1,4 @@
-<%= form_with model: @article, local: true do |form| %>
+<%= form_with model: @article, :html => {:class => "form-horizontal center"}, local: true do |form| %>
     
     <%# Check for errors and display if present %>
     <% if @article.errors.any? %>
@@ -16,9 +16,9 @@
     <% end %>
     
     <%# Begin Form %>
-    <p>
-        <%= form.label :title %><br>
-        <%= form.text_field :title %>
+    <div class="form-group">
+        <%= form.label :title, class: "col-md-4 control-label" %><br>
+        <%= form.text_field :title, class: "form-control" %>
     </p>
 
     <p>

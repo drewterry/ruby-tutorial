@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
 
     @comment = @article.comments.new
-    @comment.commenter = current_user.email
+    @comment.commenter = current_user.display_name
     @comment.body = comment_params[:body]
 
     unless @comment.save

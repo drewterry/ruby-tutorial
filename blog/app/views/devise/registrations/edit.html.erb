@@ -9,17 +9,19 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
     </div>
-    <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
-      <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-    </fieldset>
+    <% if current_user.provider.nil? %>
+      <fieldset>
+        <p>Leave these fields blank if you don't want to change your password.</p>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+      </fieldset>
+    <% end %>
     <fieldset>
         <p>Update your personal information.</p>
         <div class="form-group">
@@ -35,13 +37,15 @@
             <%= f.text_field :display_name, class: 'form-control' %>
         </div>
       </fieldset>
-      <fieldset>
-          <p>You must enter your current password to make changes.</p>
-          <div class="form-group">
-            <%= f.label :current_password %>
-            <%= f.password_field :current_password, class: 'form-control' %>
-          </div>
-      </fieldset>
+      <% if current_user.provider.nil? %>
+        <fieldset>
+            <p>You must enter your current password to make changes.</p>
+            <div class="form-group">
+              <%= f.label :current_password %>
+              <%= f.password_field :current_password, class: 'form-control' %>
+            </div>
+        </fieldset>
+      <% end %>
     <%= f.submit 'Update', :class => 'button right' %>
   <% end %>
 </div>

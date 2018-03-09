@@ -12,9 +12,11 @@ Comment.create!([
   {commenter: "nick.terry@gmail.com", body: "but seriously.", article_id: 1}
 ])
 
-User.find_or_create_by!(email: Rails.application.secrets.admin_email) do |admin|
+User.find_or_initialize_by(email: Rails.application.secrets.admin_email) do |admin|
   admin.password = Rails.application.secrets.admin_password
   admin.password_confirmation = Rails.application.secrets.admin_password
   admin.admin = true
-  admin.save
+  admin.skip_confirmation!
+  admin.confirm
+  admin.save!
 end

@@ -1,5 +1,6 @@
 # Defines article api behavior
 class ArticlesController < ApplicationController
+  before_action :admin_check, only: %i[new create update destroy]
 
   def index
     @articles = Article.all

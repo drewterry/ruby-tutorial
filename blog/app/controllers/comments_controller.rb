@@ -1,5 +1,6 @@
 # Defines comment api behavior
 class CommentsController < ApplicationController
+  before_action :admin_check, only: %i[destroy]
 
   def create
     @article = Article.find(params[:article_id])

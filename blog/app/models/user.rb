@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :validatable, :confirmable, 
-         :omniauthable, omniauth_providers: %i[facebook]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   def self.from_omniauth(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first
@@ -30,7 +30,6 @@ class User < ApplicationRecord
       user.skip_confirmation!
       user.save
     end
-    puts user.inspect
     user
   end
 

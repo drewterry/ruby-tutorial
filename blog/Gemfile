@@ -24,6 +24,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use devise for authentication
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 # Use figaro to set environment variables
 gem 'figaro'

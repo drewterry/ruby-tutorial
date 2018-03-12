@@ -1,6 +1,6 @@
 FROM ruby:2.5-slim
 
-RUN apt-get update && apt-get install -y build-essential libsqlite3-dev nodejs
+RUN apt-get update && apt-get install -y build-essential libsqlite3-dev libpq-dev nodejs
 
 RUN mkdir /blog
 WORKDIR /blog

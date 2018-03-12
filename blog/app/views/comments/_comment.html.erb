@@ -1,15 +1,16 @@
-<p>
-  <strong>Commenter:</strong>
+<strong>
   <%= comment.commenter %>
-</p>
+</strong>
 
 <p>
-  <strong>Comment</strong>
   <%= comment.body %>
 </p>
 
-<p>
-  <%= link_to  "Destroy Comment", [comment.article, comment],
-                method: :delete,
-                data: {confirm: 'Are you sure?' } %>
-</p>
+<% if current_user.admin? %>
+  <p>
+    <%= button_to  "Delete Comment", [comment.article, comment],
+                  method: :delete,
+                  data: {confirm: 'Are you sure?' },
+                  :class => "btn btn-danger btn-xs" %>
+  </p>
+<% end %>

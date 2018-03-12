@@ -21,6 +21,13 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# Use devise for authentication
+gem 'devise'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
+# Use figaro to set environment variables
+gem 'figaro'
 
 # Use grape to create an API
 gem 'grape'
@@ -67,6 +74,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Grape Routes allows you to output api routes
   gem 'grape_on_rails_routes'
+  # Use rails_layout for front-end styling
+  gem 'rails_layout' 
+  # Improve error reporting
+  gem 'better_errors'
+  # Use seed_dump to create seed file
+  gem 'seed_dump'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

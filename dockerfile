@@ -9,6 +9,6 @@ COPY blog/Gemfile blog/Gemfile.lock ./
 
 RUN gem install rails && bundle install
 
-EXPOSE 3000
+COPY ./blog /blog
 
-CMD ["bin/rails", "server"]
+CMD bin/rails server -p $PORT -b 0.0.0.0

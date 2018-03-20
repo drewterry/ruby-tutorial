@@ -91,6 +91,6 @@ Rails.application.configure do
   
   # Default urls for devise
   # TODO change these for production
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'dt-rails-blog.herokuapp.com', port: $PORT }
 
 end

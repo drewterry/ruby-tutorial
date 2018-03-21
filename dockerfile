@@ -1,6 +1,9 @@
-FROM ruby:2.5-alpine
+FROM alpine
 
 RUN apk --update --no-cache add \
+    ruby \
+    ruby-json \
+    ruby-bigdecimal \
     libpq \
     nodejs \
     tzdata \
@@ -11,7 +14,13 @@ WORKDIR /blog
 
 COPY blog/Gemfile blog/Gemfile.lock ./
 
-RUN apk --update --no-cache add --virtual build-dependencies postgresql-dev build-base && \
+RUN apk --update --no-cache add \
+        --virtual build-dependencies \
+        ruby-dev \
+        libffi-dev \
+        postgresql-dev \
+        zlib-dev \
+        build-base && \
     gem install -N bundler && \
     bundle install --no-cache && \
     apk del build-dependencies

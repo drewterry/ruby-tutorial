@@ -1,20 +1,24 @@
 FROM ruby:2.5-alpine
 
-RUN apk add --update --no-cache \
+RUN apk --update --no-cache add \
+    libpq \
     nodejs \
-    sqlite-libs \
-    tzdata
+    tzdata \
+    &&  echo 'gem: --no-document' > /etc/gemrc
 
 RUN mkdir /blog
 WORKDIR /blog
 
 COPY blog/Gemfile blog/Gemfile.lock ./
 
-RUN apk --update add --virtual build-dependencies sqlite-dev build-base && \
-    gem install bundler && \
-    bundle install --without test && \
+RUN apk --update --no-cache add --virtual build-dependencies postgresql-dev build-base && \
+    gem install -N bundler && \
+    bundle install --no-cache && \
     apk del build-dependencies
 
-EXPOSE 3000
+COPY ./blog /blog
 
-CMD ["bin/rails", "server"]
+RUN adduser -D myuser
+USER myuser
+
+CMD bin/rails server -p $PORT -b 0.0.0.0

@@ -11,4 +11,7 @@ RUN gem install rails && bundle install
 
 COPY ./blog /blog
 
+RUN useradd -m myuser
+USER myuser
+
 CMD bin/rails server -p $PORT -b 0.0.0.0

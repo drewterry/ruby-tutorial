@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'docker-compose up'
+        sh 'docker-compose up -d'
         sleep 10
         sh 'docker-compose down'
       }

@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'ls blog'
+                sh 'ls blog/tmp'
+                sh 'cd blog'
                 sh 'rails db:setup'
             }
         }

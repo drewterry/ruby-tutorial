@@ -1,11 +1,11 @@
 pipeline {
-     agent { dockerfile true }
-    //agent any
+    //agent { dockerfile true }
+    agent any
     stages {
         stage('Test') {
             steps {
-                sh 'rails --version'
-                sh 'node --version'
+                sh 'ls'
+                sh 'find / -name Dockerfile'
             }
         }
     }

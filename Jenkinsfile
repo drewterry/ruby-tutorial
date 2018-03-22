@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'ls'
-                sh 'find / -name Dockerfile'
+                sh 'ls blog'
+                sh 'rails db:setup'
             }
         }
     }

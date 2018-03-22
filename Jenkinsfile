@@ -11,8 +11,7 @@ pipeline {
         withCredentials(bindings: [[$class: 'StringBinding', credentialsId: 'heroku-registry', variable: 'API_KEY']]) {       
             sh 'docker login --username=_ --password=$API_KEY registry.heroku.com'
         }
-        sh 'heroku apps -A'
-        sh 'heroku container:push web'
+        sh 'docker push registry.heroku.com/dt-rails-blog/web'
       }
     }
   }

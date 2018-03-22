@@ -3,8 +3,9 @@ pipeline {
   stages {
     stage('Test') {
       steps {
+        sh 'docker-compose run web rails db:setup'
         sh 'docker-compose up -d'
-        sleep 10
+        sh 'wget http://localhost:3000'
         sh 'docker-compose down'
       }
     }

@@ -1,14 +1,9 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
-    
-  }
+  agent any
   stages {
     stage('Test') {
       steps {
-        sh 'cd /blog && rails db:setup'
+        sh 'docker-compose -v'
       }
     }
     stage('Deploy to Heroku') {

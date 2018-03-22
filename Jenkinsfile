@@ -8,11 +8,11 @@ pipeline {
     }
     stage('Deploy to Heroku') {
       steps {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '<heroku>',
-            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-
-            sh 'echo uname=$USERNAME pwd=$PASSWORD'
+        withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: '<heroku>',
+                    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+          sh 'echo uname=$USERNAME pwd=$PASSWORD'
         }
+        
         sh 'docker login --username=_ --password=$(heroku auth:token) registry.heroku.com'
         sh 'heroku container:push web'
       }

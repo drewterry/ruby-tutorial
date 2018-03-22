@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Deploy to Heroku') {
       steps {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '<Heroku>',
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '<heroku>',
             usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
 
             sh 'echo uname=$USERNAME pwd=$PASSWORD'

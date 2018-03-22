@@ -12,6 +12,7 @@ pipeline {
       }
     }
     stage('Deploy to Heroku') {
+      agent any
       steps {
         sh 'heroku container:push web'
       }

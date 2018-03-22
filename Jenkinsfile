@@ -8,14 +8,12 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'cd / &&             ls &&             cd blog &&             ls'
+        sh 'cd /blog && rails db:setup'
       }
     }
     stage('Deploy to Heroku') {
       agent {
-        node {
-          label 'deploy'
-        }
+        node { }
         
       }
       steps {

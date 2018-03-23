@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'docker-compose up --force-recreate'
+        sh 'docker-compose build'
+        sh 'docker-compose up'
         sh 'wget http://localhost:3000'
         sh 'docker-compose down'
         sh 'docker ps'

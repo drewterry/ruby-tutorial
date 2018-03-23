@@ -5,7 +5,6 @@ pipeline {
       steps {
         sh 'docker-compose run web ls /blog'
         sh 'docker-compose up -d'
-        sh 'wget http://localhost:3000'
         sh 'docker-compose down'
       }
     }

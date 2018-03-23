@@ -6,6 +6,7 @@ pipeline {
         sh 'docker-compose run web ls /blog'
         sh 'docker-compose up -d'
         sh 'docker-compose down'
+        sh 'docker ps'
       }
     }
     stage('Deploy to Heroku') {

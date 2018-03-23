@@ -5,6 +5,7 @@ pipeline {
       steps {
         sh 'docker-compose -f jenkins-compose.yml build'
         sh 'docker-compose -f jenkins-compose.yml run web rails db:setup'
+        sh 'docker-compose -f jenkins-compose.yml run web cat /blog/app/views/welcome/index.html.erb'
         sh 'docker-compose -f jenkins-compose.yml up -d'
         sh 'docker-compose -f jenkins-compose.yml down'
         sh 'docker ps'

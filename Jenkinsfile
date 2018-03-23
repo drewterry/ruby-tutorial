@@ -5,6 +5,7 @@ pipeline {
       steps {
         sh 'docker-compose -f jenkins-compose.yml build'
         sh 'docker-compose -f jenkins-compose.yml run web rails db:setup'
+        sh 'docker images'
       }
     }
     
@@ -22,6 +23,7 @@ pipeline {
           sh 'docker login --username=_ --password=$API_KEY registry.heroku.com'
         }
         
+        // sh 'docker tag  registry.heroku.com/dt-rails-blog/web'
         sh 'docker push registry.heroku.com/dt-rails-blog/web'
       }
     }

@@ -3,7 +3,7 @@ services:
   web:
     build: .
     command: ls /blog
-    volumes:
+    #volumes:
       # - .:/blog
     ports:
       - "3000:3000"
@@ -11,5 +11,5 @@ services:
       - db
   db:
     image: postgres
-    volumes:
+    #volumes:
       # - ./blog/tmp/db:/var/lib/postgresql/datadco

@@ -4,7 +4,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'docker-compose run web ls /blog'
-        sh 'docker-compose up -d'
+        sh 'docker-compose up'
         sh 'docker-compose down'
         sh 'docker ps'
       }

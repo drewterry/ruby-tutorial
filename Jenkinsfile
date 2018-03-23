@@ -3,11 +3,10 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'docker-compose build'
-        sh 'docker-compose run web rails db:setup'
-        sh 'docker-compose up -d'
-        sh 'curl localhost:3000'
-        sh 'docker-compose down'
+        sh 'docker-compose -f jenkins-compose.yml build'
+        sh 'docker-compose -f jenkins-compose.yml run web rails db:setup'
+        sh 'docker-compose -f jenkins-compose.yml up -d'
+        sh 'docker-compose -f jenkins-compose.yml down'
         sh 'docker ps'
       }
     }

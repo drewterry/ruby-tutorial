@@ -6,7 +6,7 @@ pipeline {
         sh 'docker-compose build'
         sh 'docker-compose run web rails db:setup'
         sh 'docker-compose up -d'
-        sh 'wget http://localhost:3000'
+        sh 'curl localhost:3000'
         sh 'docker-compose down'
         sh 'docker ps'
       }

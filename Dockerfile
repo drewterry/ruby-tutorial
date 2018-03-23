@@ -27,7 +27,7 @@ RUN apk --update --no-cache add \
 
 COPY ./blog /blog
 
-RUN adduser -D myuser
-USER myuser
+# RUN adduser -D myuser
+# USER myuser
 
 CMD bin/rails server -p $PORT -b 0.0.0.0

@@ -23,7 +23,9 @@ pipeline {
           sh 'docker login --username=_ --password=$API_KEY registry.heroku.com'
         }
         
-        // sh 'docker tag  registry.heroku.com/dt-rails-blog/web'
+        // This isn't the most efficient, but it should be cached from the docker-compose build
+        // and trying to get the name of the original image is complicated.
+        sh 'docker build -t registry.heroku.com/dt-rails-blog/web .'
         sh 'docker push registry.heroku.com/dt-rails-blog/web'
       }
     }

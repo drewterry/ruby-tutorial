@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'pwd'
+        sh 'docker-compose run web ls'
         sh 'docker-compose up'
         sh 'docker-compose down'
         sh 'docker ps'
